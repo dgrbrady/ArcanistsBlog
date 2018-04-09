@@ -1,0 +1,1 @@
+Blog to update on Arcanists development news
