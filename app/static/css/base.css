@@ -1,0 +1,21 @@
+.nav {
+    background: #1439B3;
+}
+
+a.nav-link {
+    color: white;
+}
+
+.nav-pheonix {
+    background: #FF7600;
+}
+
+#login {
+    float: right;
+}
+
+#login-dropdown {
+    left: -90px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

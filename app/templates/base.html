@@ -1,0 +1,69 @@
+{% extends "bootstrap/base.html" %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="../static/css/base.css">
+{% endblock %}
+
+{% block title %}My Blog{% endblock %}
+
+{% block navbar %}
+<!-- Navigation bar across top of screen -->
+<ul class="nav nav-tabs">
+    <li class="nav nav-pheonix"><a href="/" class="nav-link">Pheonix</a></li>
+
+    <li class="dropdown">
+        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
+            IOCs
+            <span class="caret"></span>
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a href="/" class="nav-link">Indicators</a></li>
+            <li><a href="/" class="nav-link">Low and Slows</a></li>
+        </ul>
+    </li>
+
+    <li><a href="/" class="nav-link">Duty Book</a></li>
+
+    <li class="dropdown">
+        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
+            Compliance
+            <span class="caret"></span>
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a href="/" class="nav-link">By Site</a></li>
+            <li><a href="/" class="nav-link">By POR</a></li>
+        </ul>
+    </li>
+
+    <li class="nav nav-login dropdown" id="login">
+        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
+            Login
+            <span class="caret"></span>
+        </a>
+    
+        <ul class="dropdown-menu" id="login-dropdown">
+            <li>
+                <form role="form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="User Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="********">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="login">Login</button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </li>
+
+
+</ul>
+{% endblock %}
