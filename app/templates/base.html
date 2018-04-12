@@ -1,4 +1,6 @@
 {% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" type="text/css" href="../static/css/base.css">
@@ -10,7 +12,7 @@
 <!-- Navigation bar across top of screen -->
 <ul class="nav nav-tabs">
     <li class="nav nav-pheonix"><a href="/" class="nav-link">Pheonix</a></li>
-
+<!-- IOCs -->
     <li class="dropdown">
         <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
             IOCs
@@ -22,9 +24,13 @@
             <li><a href="/" class="nav-link">Low and Slows</a></li>
         </ul>
     </li>
+<!-- End IOCs -->
 
+<!-- Duty Book -->
     <li><a href="/" class="nav-link">Duty Book</a></li>
+<!-- End Duty Book -->
 
+<!-- Compliance -->
     <li class="dropdown">
         <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
             Compliance
@@ -36,34 +42,126 @@
             <li><a href="/" class="nav-link">By POR</a></li>
         </ul>
     </li>
+<!-- End Compliance -->
 
-    <li class="nav nav-login dropdown" id="login">
+<!-- Reports -->
+    <li class="dropdown">
         <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
-            Login
+            Reports
+            <span class="caret"></span>
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a href="/" class="nav-link">Daily</a></li>
+            <li><a href="/" class="nav-link">Quarterly</a></li>
+        </ul>
+    </li>
+<!-- End Reports -->
+
+<!-- Analyst -->
+    <li class="dropdown">
+        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
+            Analyst
+            <span class="caret"></span>
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a href="/" class="nav-link">Scanners</a></li>
+            <li><a href="/" class="nav-link">Scheduled Scans</a></li>
+            <li><a href="/" class="nav-link">Scans</a></li>
+            <li><a href="/" class="nav-link">Scan Results</a></li>
+            <li><a href="/" class="nav-link">IAVMs</a></li>
+        </ul>
+    </li>
+<!-- End Analyst -->
+
+<!-- Cyber Hunt -->
+    <li class="dropdown">
+        <a id="dLabel" role="button" data-toggle="dropdown" class="dropdown-toggle nav-link" data-target="#" href="/">
+            Cyber Hunt
             <span class="caret"></span>
         </a>
     
-        <ul class="dropdown-menu" id="login-dropdown">
-            <li>
-                <form role="form">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="User Name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="********">
-                    </div>
-
-                    <div class="form-group">
-                        <button type="login">Login</button>
-                    </div>
-                </form>
+        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+            <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">IOC Tracker</a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="#">Windows</a></li>
+                    <li><a class="nav-link" href="#">Linux</a></li>
+                    <li><a class="nav-link" href="#">Mac</a></li>
+                </ul>
             </li>
+            <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Attack Matrix</a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="#">Windows</a></li>
+                    <li><a class="nav-link" href="#">Linux</a></li>
+                    <li><a class="nav-link" href="#">Mac</a></li>
+                </ul>
+            </li>
+            <li><a class="nav-link" href="/">Query Status</a></li>
         </ul>
     </li>
+<!-- End Cyber Hunt -->
 
+<!-- Program Support -->
+    <li class="dropdown">
+        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
+            Program Support
+            <span class="caret"></span>
+        </a>
 
+        <ul class="dropdown-menu">
+            <li><a href="/" class="nav-link">User Administration</a></li>
+            <li><a href="/" class="nav-link">Group Administration</a></li>
+            <li><a href="/" class="nav-link">External User Administration</a></li>
+        </ul>
+    </li>
+<!-- End Program Support -->
+
+<!-- User Metrics -->
+    <li><a href="/" class="nav-link">User Metrics</a></li>
+<!-- End User Metrics -->
+
+<!-- Subscriber Database -->
+    <li><a href="/" class="nav-link">Subscriber Database</a></li>
+<!-- End Subscriber Database -->
+
+<!-- Ticketing -->
+    <li><a href="/" class="nav-link">Ticketing</a></li>
+<!-- End Ticketing -->
+
+<!-- Tools -->
+    <li><a href="/" class="nav-link">Tools</a></li>
+<!-- End Tools -->
+
+<!-- Login -->
+    {% if not logged_in %}
+        <li class="nav nav-login dropdown" id="login">
+            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
+                Login
+                <span class="caret"></span>
+            </a>
+        
+            <ul class="dropdown-menu" id="login-dropdown">
+                <li>
+                    {{ wtf.quick_form(form) }}
+                </li>
+            </ul>
+        </li>
+    {% else %}
+        <li class="nav nav-login dropdown" id="login">
+            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
+                {{ name }}
+                <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu">
+                <li><a href="/logout" class="nav-link">Sign Out</a></li>
+            </ul>
+        </li>
+    {% endif %}
+<!-- End Login -->
 </ul>
+<!-- End Navigation bar -->
 {% endblock %}
