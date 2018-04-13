@@ -136,32 +136,27 @@
     <!-- End Tools -->
 
     <!-- Login -->
-        {% if not logged_in %}
-            <li class="nav nav-login dropdown" id="login">
-                <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
-                    Login
-                    <span class="caret"></span>
-                </a>
-            
-                <ul class="dropdown-menu" id="login-dropdown">
-                    <li>
-                        {{ wtf.quick_form(form) }}
-                    </li>
-                </ul>
-            </li>
-        {% else %}
-            <li class="nav nav-login dropdown" id="login">
-                <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
-                    {{ name }}
-                    <span class="caret"></span>
-                </a>
-
-                <ul class="dropdown-menu" id="login-dropdown">
-                    <li><a href="/logout" class="nav-link">Sign Out</a></li>
-                </ul>
-            </li>
-        {% endif %}
+{% if current_user.is_anonymous %}
+    {% block login %}
+    {% endblock %}
+{% else %}
+    {% block logout %}
+    {% endblock %}
+{% endif %}
     <!-- End Login -->
     </ul>
 <!-- End Navigation bar -->
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    {% block page_content %}{% endblock %}
+</div>
 {% endblock %}
