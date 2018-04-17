@@ -1,0 +1,10 @@
+<li class="nav nav-login dropdown" id="login">
+    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
+        {{ current_user.username }}
+        <span class="caret"></span>
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-right" id="login-dropdown">
+        <li><a href="{{ url_for('main.logout') }}" class="nav-link">Sign Out</a></li>
+    </ul>
+</li>
