@@ -136,53 +136,53 @@
     <!-- End Tools -->
 
     <!-- Login -->
-{% if current_user.is_anonymous %}
-    {% block login %}
-        <li class="nav nav-login dropdown" id="login">
-            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
-                Login
-                <span class="caret"></span>
-            </a>
-        
-            <ul class="dropdown-menu dropdown-menu-right" id="login-dropdown">
-                <li>
-                    <form action="" method="POST">
-                        {{ form.hidden_tag() }}
-                        <p>
-                            {{ form.username.label }}<br>
-                            {{ form.username(size=32) }}<br>
-                            {% for error in form.username.errors %}
-                            <span style="color: rgb(202, 1, 1);">[{{ error }}]</span>
-                            {% endfor %}
-                        </p>
-                        <p>
-                            {{ form.password.label }}<br>
-                            {{ form.password(size=32) }}<br>
-                            {% for error in form.password.errors %}
-                            <span style="color: rgb(202, 1, 1);">[{{ error }}]</span>
-                            {% endfor %}
-                        </p>
-                        <p>{{ form.submit() }}</p><hr>
-                        <p>New User? <a href="{{ url_for('main.register') }}">Click to register!</a></p>
-                    </form>
+        {% if current_user.is_anonymous %}
+            {% block login %}
+                <li class="nav nav-login dropdown" id="login">
+                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
+                        Login
+                        <span class="caret"></span>
+                    </a>
+                
+                    <ul class="dropdown-menu dropdown-menu-right" id="login-dropdown">
+                        <li>
+                            <form action="" method="POST">
+                                {{ form.hidden_tag() }}
+                                <p>
+                                    {{ form.username.label }}<br>
+                                    {{ form.username(size=32) }}<br>
+                                    {% for error in form.username.errors %}
+                                    <span style="color: rgb(202, 1, 1);">[{{ error }}]</span>
+                                    {% endfor %}
+                                </p>
+                                <p>
+                                    {{ form.password.label }}<br>
+                                    {{ form.password(size=32) }}<br>
+                                    {% for error in form.password.errors %}
+                                    <span style="color: rgb(202, 1, 1);">[{{ error }}]</span>
+                                    {% endfor %}
+                                </p>
+                                <p>{{ form.submit() }}</p><hr>
+                                <p>New User? <a href="{{ url_for('main.register') }}">Click to register!</a></p>
+                            </form>
+                        </li>
+                    </ul>
                 </li>
-            </ul>
-        </li>
-    {% endblock %}
-{% else %}
-    {% block logout %}
-        <li class="nav nav-login dropdown" id="login">
-            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
-                {{ current_user.username }}
-                <span class="caret"></span>
-            </a>
+            {% endblock %}
+        {% else %}
+            {% block logout %}
+                <li class="nav nav-login dropdown" id="login">
+                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
+                        {{ current_user.username }}
+                        <span class="caret"></span>
+                    </a>
 
-            <ul class="dropdown-menu dropdown-menu-right" id="login-dropdown">
-                <li><a href="{{ url_for('main.logout') }}" class="nav-link">Sign Out</a></li>
-            </ul>
-        </li>
-    {% endblock %}
-{% endif %}
+                    <ul class="dropdown-menu dropdown-menu-right" id="login-dropdown">
+                        <li><a href="{{ url_for('main.logout') }}" class="nav-link">Sign Out</a></li>
+                    </ul>
+                </li>
+            {% endblock %}
+        {% endif %}
     <!-- End Login -->
     </ul>
 <!-- End Navigation bar -->
