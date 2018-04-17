@@ -20,6 +20,7 @@ def create_app(config_name):
     moment.init_app(app)
     db.init_app(app)
     login.init_app(app)
+    login.login_view = 'main.index'
     # attach routes and custom error pages here
 
     from .main import main as main_blueprint
