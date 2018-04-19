@@ -28,7 +28,7 @@ class Role(db.Model):
     users = db.relationship('User', backref='role')
 
     def __repr__(self):
-        return '<Role: {}'.format(self.name)
+        return '<Role: {}>'.format(self.name)
 
 @login.user_loader
 def load_user(id):
