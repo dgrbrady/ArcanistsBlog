@@ -25,7 +25,7 @@ a.nav-link {
 }
 
 .content {
-    background-color: whitesmoke;
+    margin: 5px;
 }
 .dropdown-submenu {
     position: relative;
