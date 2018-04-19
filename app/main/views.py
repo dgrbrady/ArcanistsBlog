@@ -3,7 +3,7 @@ from flask import render_template, session, redirect, url_for, flash, request
 from . import main
 from .forms import LoginForm, RegistrationForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, BigNumbers
 from werkzeug.urls import url_parse
 from app import db
 
@@ -30,7 +30,18 @@ def logout():
 @login_required
 @main.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    big_numbers = BigNumbers.query.first()
+    open_tickets = big_numbers.open_tickets
+    closed_tickets = big_numbers.closed_tickets
+    last_month = big_numbers.tickets_last_month
+    this_quarter = big_numbers.tickets_this_quarter
+    ticket_leader = big_numbers.ticket_leader
+    return render_template('dashboard.html',
+                            open_tickets=open_tickets,
+                            closed_tickets=closed_tickets,
+                            last_month=last_month,
+                            this_quarter=this_quarter,
+                            ticket_leader=ticket_leader)
 
 @main.route('/register', methods=['GET', 'POST'])
 def register():

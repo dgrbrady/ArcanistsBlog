@@ -30,6 +30,29 @@ class Role(db.Model):
     def __repr__(self):
         return '<Role: {}>'.format(self.name)
 
+class BigNumbers(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    open_tickets = db.Column(db.Integer)
+    closed_tickets = db.Column(db.Integer)
+    tickets_last_month = db.Column(db.Integer)
+    tickets_this_quarter = db.Column(db.Integer)
+    ticket_leader = db.Column(db.String(64))
+
+    def get_open_tickets(self):
+        return self.open_tickets
+
+    def get_closed_tickets(self):
+        return self.closed_tickets
+
+    def get_tickets_last_month(self):
+        return self.tickets_last_month
+    
+    def get_tickets_this_quarter(self):
+        return self.tickets_this_quarter
+    
+    def get_ticket_leader(self):
+        return self.ticket_leader
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
