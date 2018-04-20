@@ -6,6 +6,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, BigNumbers
 from werkzeug.urls import url_parse
 from app import db
+import pdb
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -56,3 +57,12 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('main.index'))
     return render_template('register.html', form=form)
+
+@main.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    if user == current_user:
+        return render_template('user.html', user=user, email=user.email)
+    else:
+        return render_template('403.html')
