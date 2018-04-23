@@ -58,11 +58,11 @@ def register():
         return redirect(url_for('main.index'))
     return render_template('register.html', form=form)
 
-@main.route('/user/<username>')
+@main.route('/profile')
 @login_required
-def user(username):
-    user = User.query.filter_by(username=username).first_or_404()
+def profile():
+    user = User.query.filter_by(username=current_user.username).first_or_404()
     if user == current_user:
-        return render_template('user.html', user=user, email=user.email)
+        return render_template('profile.html', user=user, email=user.email)
     else:
         return render_template('403.html')
