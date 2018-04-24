@@ -35,3 +35,17 @@ def change_email():
     if not next_page or url_parse(next_page).netloc != '':
         next_page = url_for('main.profile')
     return redirect(next_page)
+
+@login_required
+@auth.bp.route('/change-password', methods=['GET', 'POST'])
+def change_password():
+    new_password = request.form.get('new-password')
+    new_password2 = request.form.get('new-password2')
+    if new_password == new_password2:
+        current_user.set_password(password=new_password)
+    db.session.add(current_user)
+    db.session.commit()
+    next_page = request.args.get('next')
+    if not next_page or url_parse(next_page).netloc != '':
+        next_page = url_for('main.profile')
+    return redirect(next_page)
