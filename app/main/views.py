@@ -39,9 +39,4 @@ def dashboard():
 @main.bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    email_form = ChangeEmailForm()
-    if email_form.validate_on_submit():
-        current_user.set_email(email=email_form.new_email.data)
-        db.session.add(current_user)
-        db.session.commit()
-    return render_template('profile.html', user=current_user, email=current_user.email, form=email_form)
+    return render_template('profile.html', user=current_user, email=current_user.email)

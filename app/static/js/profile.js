@@ -5,8 +5,8 @@
 let emailForm = document.getElementById('email-form');
 let emailButton = document.getElementById('change-email-button');
 
-emailForm.style.display = 'none';
+/* emailForm.style.display = 'none';
 
 emailButton.addEventListener('click', function() {
     emailForm.style.display = 'inline';
-})
+})*/
