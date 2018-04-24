@@ -126,9 +126,9 @@
 
     <!-- Login -->
         {% if current_user.is_anonymous %}
-        {% include '_login.html' %}
+        {% include 'auth/_login.html' %}
         {% else %}
-        {% include '_logout.html' %}
+        {% include 'auth/_logout.html' %}
         {% endif %}
     <!-- End Login -->
 </ul>

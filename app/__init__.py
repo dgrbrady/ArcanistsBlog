@@ -10,8 +10,13 @@ bootstrap = Bootstrap()
 moment = Moment()
 db = SQLAlchemy()
 login = LoginManager()
+login.login_view = 'auth.index'
 
 def create_app(config_name):
+    """
+    Application Factory funtion. Passes a config object and instantiates components
+    needed for application.
+    """
     app = Flask(__name__)
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
@@ -20,10 +25,20 @@ def create_app(config_name):
     moment.init_app(app)
     db.init_app(app)
     login.init_app(app)
-    login.login_view = 'main.index'
-    # attach routes and custom error pages here
 
-    from .main import main as main_blueprint
+    """
+    Register Blueprint section
+    """
+    # Register Main blueprint/module
+    from .main import bp as main_blueprint
     app.register_blueprint(main_blueprint)
+
+    # Register Authentication blueprint/module
+    from app.auth import bp as auth_bp
+    app.register_blueprint(auth_bp, url_prefix='/auth')
+
+    # Register Error Handling blueprint/module
+    from app.errors import bp as errors_bp
+    app.register_blueprint(errors_bp)
     
     return app

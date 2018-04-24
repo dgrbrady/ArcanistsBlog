@@ -1,15 +1,11 @@
-{% import "bootstrap/wtf.html" as wtf %}
-
 <li class="nav nav-login dropdown" id="login">
     <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
-        Login
+        {{ current_user.username }}
         <span class="caret"></span>
     </a>
 
     <ul class="dropdown-menu dropdown-menu-right" id="login-dropdown">
-        <li>
-            {{ wtf.quick_form(form) }}<hr>
-            <p>New User? <a href="{{ url_for('main.register') }}">Click to register!</a></p>
-        </li>
+        <li><a href="{{ url_for('main.profile') }}" class="nav-link">My Profile</a></li>
+        <li><a href="{{ url_for('auth.logout') }}" class="nav-link">Sign Out</a></li>
     </ul>
 </li>
