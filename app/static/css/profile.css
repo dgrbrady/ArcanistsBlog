@@ -1,0 +1,8 @@
+div.email p {
+    display: inline;
+    border-bottom: #FF8333;
+    border-bottom-style: solid;
+}
+.btn-xs {
+    display: inline;
+}

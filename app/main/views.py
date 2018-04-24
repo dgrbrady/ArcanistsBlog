@@ -1,9 +1,9 @@
 from flask import render_template, session, redirect, url_for, flash, request
-from .forms import LoginForm
+from .forms import LoginForm, ChangeEmailForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, BigNumbers
 from werkzeug.urls import url_parse
-from app import main
+from app import db, main
 
 @main.bp.route('/', methods=['GET', 'POST'])
 def index():
@@ -36,11 +36,12 @@ def dashboard():
                             this_quarter=this_quarter,
                             ticket_leader=ticket_leader)
 
-@main.bp.route('/profile')
+@main.bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    user = User.query.filter_by(username=current_user.username).first_or_404()
-    if user == current_user:
-        return render_template('profile.html', user=user, email=user.email)
-    else:
-        return render_template('errors/403.html')
+    email_form = ChangeEmailForm()
+    if email_form.validate_on_submit():
+        current_user.set_email(email=email_form.new_email.data)
+        db.session.add(current_user)
+        db.session.commit()
+    return render_template('profile.html', user=current_user, email=current_user.email, form=email_form)

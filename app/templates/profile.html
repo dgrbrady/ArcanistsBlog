@@ -1,10 +1,24 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="../static/css/profile.css">
+{% endblock %}
 
 {% block page_content %}
     <h1>User: {{ user.username }}</h1>
     <hr>
-    <p>Email: {{ user.email }}</p>
-    <a href="#">Change Email</a>
-    <br>
+    <div class="email">
+        <label for="current-email">Email: </label>
+        <p>{{ user.email }}</p>
+        <button type="button" id="change-email-button" class="btn-xs">Change Email</button>
+        <div id="email-form">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
     <a href="#">Change Password</a>
+
+    <script type="text/javascript" src="../static/js/profile.js">
+    </script>
 {% endblock %}
