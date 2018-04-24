@@ -45,6 +45,7 @@ def change_password():
         current_user.set_password(password=new_password)
     db.session.add(current_user)
     db.session.commit()
+    flash('Password changed! Please log out and log back in')
     next_page = request.args.get('next')
     if not next_page or url_parse(next_page).netloc != '':
         next_page = url_for('main.profile')
