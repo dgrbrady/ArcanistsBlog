@@ -40,5 +40,9 @@ def create_app(config_name):
     # Register Error Handling blueprint/module
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
+
+    # Register SQLite blueprint/module
+    from app.sql import bp as sql_bp
+    app.register_blueprint(sql_bp)
     
     return app

@@ -1,9 +1,9 @@
 from flask import render_template, session, redirect, url_for, flash, request
-from .forms import LoginForm, ChangeEmailForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, BigNumbers
+from app.sql.models import User, BigNumbers
 from werkzeug.urls import url_parse
 from app import db, main
+from app.main.forms import LoginForm, ChangeEmailForm
 
 @main.bp.route('/', methods=['GET', 'POST'])
 def index():
