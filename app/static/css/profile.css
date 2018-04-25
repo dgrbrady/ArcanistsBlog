@@ -1,8 +1,9 @@
-div.email p {
-    display: inline;
-    border-bottom: #FF8333;
-    border-bottom-style: solid;
-}
-.btn-xs {
-    display: inline;
+/*---------------------CSS GRID LAYOUT---------------------------*/
+/* CONTAINER */
+.container {
+    display: grid;
+    align-content: space-evenly;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-gap: 5px;
 }
