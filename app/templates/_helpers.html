@@ -78,6 +78,8 @@
 {% macro render_form(action_url, method, class, button_value, button_text) %}
     <form action="{{ action_url }}" method="{{ method }}" class="{{ class }}">
         {{ caller() }}
-        <button type="submit" class="btn btn-primary mb-2" value="{{ button_value }}">{{ button_text }}</button>
+        <button type="submit" class="btn btn-primary mb-2" value="{{ button_value }}">
+            {{ button_text }}
+        </button>
     </form>
 {% endmacro %}
