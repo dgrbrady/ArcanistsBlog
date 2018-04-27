@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "_helpers.html" as macros %}
 
 {% block head %}
 {{ super() }}
@@ -9,29 +10,24 @@
     <h1 class="text-center">User - {{ user.username }}</h1>
     <hr>
     <div class="profile container">
-        <form action="{{ url_for('auth.change_email') }}" method="POST" class="form-inline" role="form">
-            <div class="form-group mb-2">
-                <label for="current-email">Change Email Address</label>
-                <input type="text" readonly class="form-control" id="current-email" value="{{ user.email }}">
-            </div>
-            <div class="form-group mx-sm-3 mb-2">
-                <label for="new-email" class="sr-only">New Email</label>
-                <input type="email" class="form-control" id="new-email" name="new-email" placeholder="New Email Address">
-            </div>
-            <button type="submit" class="btn btn-primary mb-2" value="Save">Save</button>
-        </form>
+        {% call macros.render_form(action_url=url_for('auth.change_email'), method="POST",
+                                    class="form-inline", button_text="Save") %}
+            {{ macros.render_field('Change Email Address', type='text', field_class='mb-2',
+                                    id='current-email', value=user.email) }}
+            {{ macros.render_field('New Email Address', label_class='sr-only', type='email',
+                                    field_class='mx-sm-3 mb-2', id='new-email', name='new-email',
+                                    placeholder='New Email Address') }}
+        {% endcall %}
 
-        <form action="{{ url_for('auth.change_password') }}" method="POST" class="form-inline" role="form">
-            <div class="form-group mb-2">
-                <label for="new-password">Change Password</label>
-                <input type="password" class="form-control" id="new-password" name="new-password" placeholder="New Password">
-            </div>
-            <div class="form-group mx-sm-3 mb-2">
-                <label for="new-password2" class="sr-only">Repeat New Password</label>
-                <input type="password" class="form-control" id="new-password2" name="new-password2" placeholder="Repeat New Password">
-            </div>
-            <button type="submit" class="btn btn-primary mb-2" value="Save">Save</button>
-        </form>
+        {% call macros.render_form(action_url=url_for('auth.change_password'), method="POST",
+                                    class="form-inline", button_text="Save") %}
+            {{ macros.render_field('Change Password', type='password', field_class='mb-2',
+                                    id='new-password', name='new-password',
+                                    placeholder='New Password') }}
+            {{ macros.render_field('Retype New Password', label_class='sr-only', type='password',
+                                    field_class='mx-sm-3 mb-2', id='new-password2',
+                                    name='new-password2', placeholder='Retype New Password') }}
+        {% endcall %}
     </div>
 
     <script type="text/javascript" src="../static/js/profile.js">

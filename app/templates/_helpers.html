@@ -1,0 +1,83 @@
+{# Renders field to be used in a <form>. Will generate <label> and <input> elements.
+
+    Params:
+        label -> text that will be inside the <label> element.
+        label_class -> 'class' attribute for <label> element. 
+        field_class -> 'class' attribute for <div> element that encompasses the entire field.
+        type -> 'type' attribute for the <input> element.
+        id -> 'id' attribute for the <input> element.
+        name -> 'name' attribute for the <input> element.
+        placeholder -> 'placeholder' attribute for the <input> element.
+        value -> 'value' attribute for the <input> element that sets default value.
+        readonly -> bool type. Sets if field is readonly or not.
+
+    Example usage:
+        {{ macros.render_field('Username', type='text', id='username',
+                                placeholder='Enter Username') }}
+    
+    Will produce:
+        <div class="form-group ">
+            <label for="username" class="">Username</label>
+            <input type="text"
+                    id="username"
+                    name=""
+                    class="form-control"
+                    placeholder="Enter Username"
+            >
+        </div>
+#}
+{% macro render_field(label, label_class, field_class, type, id, name, placeholder, value, readonly,
+                    input_class='form-control')  %}
+
+    <div class="form-group {{ field_class }}">
+        <label for="{{ id }}" class="{{ label_class }}">{{ label }}</label>
+        <input type="{{ type }}"
+                id="{{ id }}"
+                name="{{ name }}"
+                class="{{ input_class }}"
+                placeholder="{{ placeholder }}"
+                value="{{ value }}"
+                {% if readonly %}readonly{% endif %}
+        >
+    </div>
+{% endmacro %}
+
+
+{# Renders <form> element, includes fields specified and places a button at the bottom.
+    This macro MUST be used within a {% call %} block. It also MUST call the render_field()
+    macro or else you will get 'No caller defined' error. 
+
+    Params:
+        action_url -> url where to submit this form.
+        method -> HTTP header to use for submitting form. Usually 'POST'.
+        class -> 'class' attribute for form element.
+        button_value -> default value for button if needed.
+        button_text -> text that displays on the button.
+
+    Example Usage:
+        {% call macros.render_form(action_url=url_for('foo.bar'), method="POST",
+                                    class="form-inline", button_text="Save") %}
+            {{ macros.render_field('Username', type='text', id='username',
+                                    placeholder='Enter Username') }}
+        {% endcall %}
+    
+    Will produce:
+        <form action="/foo/bar" method="POST" class="form-inline">
+            <div class="form-group ">
+                <label for="username" class="">Username</label>
+                <input type="text"
+                        id="username"
+                        name=""
+                        class="form-control"
+                        placeholder="Enter Username"
+                >
+            </div>
+            <button type="submit" class="btn btn-primary mb-2" value="">Save</button>
+        </form>
+#}
+{% macro render_form(action_url, method, class, button_value, button_text) %}
+    <form action="{{ action_url }}" method="{{ method }}" class="{{ class }}">
+        {{ caller() }}
+        <button type="submit" class="btn btn-primary mb-2" value="{{ button_value }}">{{ button_text }}</button>
+    </form>
+{% endmacro %}
