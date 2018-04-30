@@ -1,68 +1,25 @@
+{% import "_helpers.html" as macros %}
 <!-- Navigation bar across top of screen -->
 <ul class="nav nav-tabs">
     <li class="nav nav-pheonix"><a href="/" class="nav-link">Pheonix</a></li>
-    <!-- IOCs -->
-        <li class="dropdown">
-            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
-                IOCs
-                <span class="caret"></span>
-            </a>
+    {# IOCs #}
+    {% set dropdowns = ['Indicators', 'Low and Slows'] %}
+    {{ macros.render_navbar_item(url='/', display_name='IOCs', dropdowns=dropdowns) }}
 
-            <ul class="dropdown-menu">
-                <li><a href="/" class="nav-link">Indicators</a></li>
-                <li><a href="/" class="nav-link">Low and Slows</a></li>
-            </ul>
-        </li>
-    <!-- End IOCs -->
+    {# Duty Book #}
+    {{ macros.render_navbar_item(url='/', display_name='Duty Book') }}
+    
+    {# Compliance #}
+    {% set dropdowns = ['By Site', 'By POR'] %}
+    {{ macros.render_navbar_item(url='/', display_name='Compliance', dropdowns=dropdowns) }}
 
-    <!-- Duty Book -->
-        <li><a href="/" class="nav-link">Duty Book</a></li>
-    <!-- End Duty Book -->
+    {# Reports #}
+    {% set dropdowns = ['Daily', 'Quarterly'] %}
+    {{ macros.render_navbar_item(url='/', display_name='Reports', dropdowns=dropdowns) }}
 
-    <!-- Compliance -->
-        <li class="dropdown">
-            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
-                Compliance
-                <span class="caret"></span>
-            </a>
-
-            <ul class="dropdown-menu">
-                <li><a href="/" class="nav-link">By Site</a></li>
-                <li><a href="/" class="nav-link">By POR</a></li>
-            </ul>
-        </li>
-    <!-- End Compliance -->
-
-    <!-- Reports -->
-        <li class="dropdown">
-            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
-                Reports
-                <span class="caret"></span>
-            </a>
-
-            <ul class="dropdown-menu">
-                <li><a href="/" class="nav-link">Daily</a></li>
-                <li><a href="/" class="nav-link">Quarterly</a></li>
-            </ul>
-        </li>
-    <!-- End Reports -->
-
-    <!-- Analyst -->
-        <li class="dropdown">
-            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
-                Analyst
-                <span class="caret"></span>
-            </a>
-
-            <ul class="dropdown-menu">
-                <li><a href="/" class="nav-link">Scanners</a></li>
-                <li><a href="/" class="nav-link">Scheduled Scans</a></li>
-                <li><a href="/" class="nav-link">Scans</a></li>
-                <li><a href="/" class="nav-link">Scan Results</a></li>
-                <li><a href="/" class="nav-link">IAVMs</a></li>
-            </ul>
-        </li>
-    <!-- End Analyst -->
+    {# Analyst #}
+    {% set dropdowns = ['Scanners', 'Scans', 'Scheduled Scans', 'Scan Results', 'IAVMs'] %}
+    {{ macros.render_navbar_item(url='/', display_name='Analyst', dropdowns=dropdowns) }}
 
     <!-- Cyber Hunt -->
         <li class="dropdown">
@@ -92,44 +49,33 @@
             </ul>
         </li>
     <!-- End Cyber Hunt -->
+    {% set dropdowns = [
+        ['IOC Tracker', ['Windows', 'Linux', 'Mac']],
+        ['Attack Matrix', ['Windows', 'Linux', 'Mac']]
+        ] %}
+    {{ macros.render_navbar_item(url='/', display_name='Cyber Hunt', dropdowns=dropdowns, multi_level=true) }}
 
-    <!-- Program Support -->
-        <li class="dropdown">
-            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="/">
-                Program Support
-                <span class="caret"></span>
-            </a>
+    {# Program Support #}
+    {% set dropdowns = ['Users', 'Groups', 'External Users'] %}
+    {{ macros.render_navbar_item(url='/', display_name='Program Support', dropdowns=dropdowns) }}
+    
+    {# User Metrics #}
+    {{ macros.render_navbar_item(url='/', display_name='User Metrics') }}
 
-            <ul class="dropdown-menu">
-                <li><a href="/" class="nav-link">User Administration</a></li>
-                <li><a href="/" class="nav-link">Group Administration</a></li>
-                <li><a href="/" class="nav-link">External User Administration</a></li>
-            </ul>
-        </li>
-    <!-- End Program Support -->
+    {# Subscriber #}
+    {{ macros.render_navbar_item(url='/', display_name='Subscriber') }}
 
-    <!-- User Metrics -->
-        <li><a href="/" class="nav-link">User Metrics</a></li>
-    <!-- End User Metrics -->
+    {# Ticketing #}
+    {{ macros.render_navbar_item(url='/', display_name='Ticketing') }}
 
-    <!-- Subscriber Database -->
-        <li><a href="/" class="nav-link">Subscriber Database</a></li>
-    <!-- End Subscriber Database -->
+    {# Tools #}
+    {{ macros.render_navbar_item(url='/', display_name='Tools') }}
 
-    <!-- Ticketing -->
-        <li><a href="/" class="nav-link">Ticketing</a></li>
-    <!-- End Ticketing -->
-
-    <!-- Tools -->
-        <li><a href="/" class="nav-link">Tools</a></li>
-    <!-- End Tools -->
-
-    <!-- Login -->
-        {% if current_user.is_anonymous %}
-        {% include 'auth/_login.html' %}
-        {% else %}
-        {% include 'auth/_logout.html' %}
-        {% endif %}
-    <!-- End Login -->
+    {# Login #}
+    {% if current_user.is_anonymous %}
+    {% include 'auth/_login.html' %}
+    {% else %}
+    {% include 'auth/_logout.html' %}
+    {% endif %}
 </ul>
 <!-- End Navigation bar -->
