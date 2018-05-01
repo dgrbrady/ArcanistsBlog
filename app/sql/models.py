@@ -2,6 +2,7 @@ from app import db, login
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -12,15 +13,16 @@ class User(UserMixin, db.Model):
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
-    
+
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
     def set_email(self, email):
         self.email = email
-        
+
     def __repr__(self):
         return '<User: {}>'.format(self.username)
+
 
 class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -29,6 +31,7 @@ class Role(db.Model):
 
     def __repr__(self):
         return '<Role: {}>'.format(self.name)
+
 
 class BigNumbers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -46,12 +49,13 @@ class BigNumbers(db.Model):
 
     def get_tickets_last_month(self):
         return self.tickets_last_month
-    
+
     def get_tickets_this_quarter(self):
         return self.tickets_this_quarter
-    
+
     def get_ticket_leader(self):
         return self.ticket_leader
+
 
 @login.user_loader
 def load_user(id):

@@ -12,6 +12,7 @@ db = SQLAlchemy()
 login = LoginManager()
 login.login_view = 'auth.index'
 
+
 def create_app(config_name):
     """
     Application Factory funtion. Passes a config object and instantiates components
@@ -44,5 +45,5 @@ def create_app(config_name):
     # Register SQLite blueprint/module
     from app.sql import bp as sql_bp
     app.register_blueprint(sql_bp)
-    
+
     return app
