@@ -4,9 +4,12 @@ from app.sql.models import User, BigNumbers
 from werkzeug.urls import url_parse
 from app import db, main
 from app.main.forms import LoginForm, ChangeEmailForm
+from app.main.navbar import Navbar
+
 
 @main.bp.route('/', methods=['GET', 'POST'])
 def index():
+    navbar = Navbar()
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -18,7 +21,8 @@ def index():
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('main.dashboard')
         return redirect(next_page)
-    return render_template('/index.html', form=form)
+    return render_template('/index.html', navbar=navbar, form=form)
+
 
 @login_required
 @main.bp.route('/dashboard')
@@ -29,14 +33,19 @@ def dashboard():
     last_month = big_numbers.tickets_last_month
     this_quarter = big_numbers.tickets_this_quarter
     ticket_leader = big_numbers.ticket_leader
-    return render_template('dashboard.html',
-                            open_tickets=open_tickets,
-                            closed_tickets=closed_tickets,
-                            last_month=last_month,
-                            this_quarter=this_quarter,
-                            ticket_leader=ticket_leader)
+    return render_template(
+        'dashboard.html',
+        open_tickets=open_tickets,
+        closed_tickets=closed_tickets,
+        last_month=last_month,
+        this_quarter=this_quarter,
+        ticket_leader=ticket_leader)
+
 
 @main.bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    return render_template('profile.html', user=current_user, email=current_user.email)
+    return render_template(
+        'profile.html',
+        user=current_user,
+        email=current_user.email)

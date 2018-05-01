@@ -119,3 +119,14 @@
         <li><a href="{{ url }}" class="nav-link">{{ display_name }}</a></li>
     {% endif %}
 {% endmacro %}
+
+{% macro render_navbar(navbar) %}
+
+        <li class="dropdown">
+            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="{{ url }}">
+                {{ navbar['item'] }}
+                <span class="caret"></span>
+            </a>
+        </li>
+
+{% endmacro %}

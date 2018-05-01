@@ -6,6 +6,8 @@
     {% set dropdowns = ['Indicators', 'Low and Slows'] %}
     {{ macros.render_navbar_item(url='/', display_name='IOCs', dropdowns=dropdowns) }}
 
+    {{ macros.render_navbar(navbar) }}
+
     {# Duty Book #}
     {{ macros.render_navbar_item(url='/', display_name='Duty Book') }}
     

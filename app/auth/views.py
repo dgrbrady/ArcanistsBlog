@@ -5,10 +5,12 @@ from app.sql.models import User
 from app import db, auth
 from werkzeug.urls import url_parse
 
+
 @auth.bp.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
 
 @auth.bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -24,6 +26,7 @@ def register():
         return redirect(url_for('main.index'))
     return render_template('auth/register.html', form=form)
 
+
 @login_required
 @auth.bp.route('/change-email', methods=['GET', 'POST'])
 def change_email():
@@ -35,6 +38,7 @@ def change_email():
     if not next_page or url_parse(next_page).netloc != '':
         next_page = url_for('main.profile')
     return redirect(next_page)
+
 
 @login_required
 @auth.bp.route('/change-password', methods=['GET', 'POST'])

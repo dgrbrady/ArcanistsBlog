@@ -3,11 +3,13 @@ from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 from app.sql.models import User
 
+
 class LoginForm(FlaskForm):
     username = StringField('Username:', validators=[DataRequired()])
     password = PasswordField('Password:', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username:', validators=[DataRequired()])
@@ -26,5 +28,3 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
-        
-    
