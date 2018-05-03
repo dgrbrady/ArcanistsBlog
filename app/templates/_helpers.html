@@ -84,7 +84,10 @@
     </form>
 {% endmacro %}
 
-{# TODO: Documentation! #}
+{# Renders the navigation bar for Pheonix.
+    Params:
+        navbar -> **REQUIRED** instance of NavBar class. 
+#}
 {% macro render_navbar(navbar) %}
 {% for key, value in navbar.menus.items() %}
     <li class="dropdown">
