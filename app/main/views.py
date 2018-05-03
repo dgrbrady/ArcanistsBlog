@@ -4,12 +4,10 @@ from app.sql.models import User, BigNumbers
 from werkzeug.urls import url_parse
 from app import db, main
 from app.main.forms import LoginForm, ChangeEmailForm
-from app.main.navbar import Navbar
 
 
 @main.bp.route('/', methods=['GET', 'POST'])
 def index():
-    navbar = Navbar()
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -21,7 +19,7 @@ def index():
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('main.dashboard')
         return redirect(next_page)
-    return render_template('/index.html', navbar=navbar, form=form)
+    return render_template('/index.html', form=form)
 
 
 @login_required

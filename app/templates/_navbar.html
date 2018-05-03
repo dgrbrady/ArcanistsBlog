@@ -1,77 +1,9 @@
 {% import "_helpers.html" as macros %}
+
 <!-- Navigation bar across top of screen -->
 <ul class="nav nav-tabs">
     <li class="nav nav-pheonix"><a href="/" class="nav-link">Pheonix</a></li>
-    {# IOCs #}
-    {% set dropdowns = ['Indicators', 'Low and Slows'] %}
-    {{ macros.render_navbar_item(url='/', display_name='IOCs', dropdowns=dropdowns) }}
-
     {{ macros.render_navbar(navbar) }}
-
-    {# Duty Book #}
-    {{ macros.render_navbar_item(url='/', display_name='Duty Book') }}
-    
-    {# Compliance #}
-    {% set dropdowns = ['By Site', 'By POR'] %}
-    {{ macros.render_navbar_item(url='/', display_name='Compliance', dropdowns=dropdowns) }}
-
-    {# Reports #}
-    {% set dropdowns = ['Daily', 'Quarterly'] %}
-    {{ macros.render_navbar_item(url='/', display_name='Reports', dropdowns=dropdowns) }}
-
-    {# Analyst #}
-    {% set dropdowns = ['Scanners', 'Scans', 'Scheduled Scans', 'Scan Results', 'IAVMs'] %}
-    {{ macros.render_navbar_item(url='/', display_name='Analyst', dropdowns=dropdowns) }}
-
-    <!-- Cyber Hunt -->
-        <li class="dropdown">
-            <a id="dLabel" role="button" data-toggle="dropdown" class="dropdown-toggle nav-link" data-target="#" href="/">
-                Cyber Hunt
-                <span class="caret"></span>
-            </a>
-        
-            <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                <li class="dropdown-submenu">
-                    <a tabindex="-1" href="#">IOC Tracker</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="nav-link" href="#">Windows</a></li>
-                        <li><a class="nav-link" href="#">Linux</a></li>
-                        <li><a class="nav-link" href="#">Mac</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-submenu">
-                    <a tabindex="-1" href="#">Attack Matrix</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="nav-link" href="#">Windows</a></li>
-                        <li><a class="nav-link" href="#">Linux</a></li>
-                        <li><a class="nav-link" href="#">Mac</a></li>
-                    </ul>
-                </li>
-                <li><a class="nav-link" href="/">Query Status</a></li>
-            </ul>
-        </li>
-    <!-- End Cyber Hunt -->
-    {% set dropdowns = [
-        ['IOC Tracker', ['Windows', 'Linux', 'Mac']],
-        ['Attack Matrix', ['Windows', 'Linux', 'Mac']]
-        ] %}
-    {{ macros.render_navbar_item(url='/', display_name='Cyber Hunt', dropdowns=dropdowns, multi_level=true) }}
-
-    {# Program Support #}
-    {% set dropdowns = ['Users', 'Groups', 'External Users'] %}
-    {{ macros.render_navbar_item(url='/', display_name='Program Support', dropdowns=dropdowns) }}
-    
-    {# User Metrics #}
-    {{ macros.render_navbar_item(url='/', display_name='User Metrics') }}
-
-    {# Subscriber #}
-    {{ macros.render_navbar_item(url='/', display_name='Subscriber') }}
-
-    {# Ticketing #}
-    {{ macros.render_navbar_item(url='/', display_name='Ticketing') }}
-
-    {# Tools #}
-    {{ macros.render_navbar_item(url='/', display_name='Tools') }}
 
     {# Login #}
     {% if current_user.is_anonymous %}

@@ -84,49 +84,40 @@
     </form>
 {% endmacro %}
 
-{% macro render_navbar_item(url, display_name, dropdowns, multi_level) %}
-    {% if dropdowns %}    
-        <li class="dropdown">
-            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="{{ url }}">
-                {{ display_name }}
-                <span class="caret"></span>
-            </a>
-            {% if multi_level %}
-                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                {% for dropdown in dropdowns %}
-                    <li class="dropdown-submenu">
-                        <a tabindex="-1" href="#">{{ dropdown[0] }}</a>
-                        {% for submenu in dropdown %}
-                            <ul class="dropdown-menu">
-                                {% for item in submenu %}
-                                <li><a class="nav-link" href="#">{{ item }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        {% endfor %}
-                    </li>
-                {% endfor %}
-                    <li><a class="nav-link" href="/">Query Status</a></li>
-                </ul>
-            {% else %}
-                <ul class="dropdown-menu">
-                    {% for dropdown in dropdowns -%}
-                        <li><a class="nav-link" href="{{ url }}">{{ dropdown }}</a></li>
-                    {% endfor -%}
-                </ul>
-            {% endif %}
-        </li>
-    {% else %}
-        <li><a href="{{ url }}" class="nav-link">{{ display_name }}</a></li>
-    {% endif %}
-{% endmacro %}
-
+{# TODO: Documentation! #}
 {% macro render_navbar(navbar) %}
-
-        <li class="dropdown">
-            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="{{ url }}">
-                {{ navbar['item'] }}
-                <span class="caret"></span>
-            </a>
-        </li>
-
+{% for key, value in navbar.menus.items() %}
+    <li class="dropdown">
+    {% if navbar.is_empty(navbar, key) %}
+        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="{{ url }}">
+            {{ key }}
+        </a>
+    {% else %}
+        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="{{ url }}">
+            {{ key }}
+            <span class="caret"></span>
+        </a>
+    {% endif %}
+        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+            {% if not navbar.is_empty(navbar, key) %}
+                {% for option in value %}
+                    {% if option is mapping %}
+                        {% for parent, child in option.items() %}    
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">{{ parent }}</a>
+                                <ul class="dropdown-menu">
+                                    {% for suboption in child %}
+                                        <li><a class="nav-link" href="#">{{ suboption }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li><a class="nav-link" href="{{ url }}">{{ option }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </li>
+{% endfor %}
 {% endmacro %}

@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import config
 
+
 bootstrap = Bootstrap()
 moment = Moment()
 db = SQLAlchemy()
