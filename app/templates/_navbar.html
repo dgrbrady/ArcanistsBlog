@@ -1,9 +1,9 @@
-{% import "_helpers.html" as macros %}
+{% from "_helpers.html" import render_navbar %}
 
 <!-- Navigation bar across top of screen -->
 <ul class="nav nav-tabs">
     <li class="nav nav-pheonix"><a href="/" class="nav-link">Pheonix</a></li>
-    {{ macros.render_navbar(navbar) }}
+    {{ render_navbar(navbar) }}
 
     {# Login #}
     {% if current_user.is_anonymous %}
