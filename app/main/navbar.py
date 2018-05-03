@@ -1,3 +1,6 @@
+from flask import url_for
+
+
 class NavBar(object):
     """Objects from this class hold a dict of items to populate the navigation bar.
 
@@ -67,7 +70,7 @@ class NavBar(object):
     }
 
     def is_empty(self, menu):
-        """Pass a menu as a string to check if the menu contains any sub-menus.
+        """Pass a menu as a string to check if the menu does not contain sub-menus.
 
         :param self: instance of NavBar.
         :param menu: *string* menu item to be evaluated.
