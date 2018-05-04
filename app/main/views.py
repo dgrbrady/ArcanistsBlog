@@ -47,3 +47,11 @@ def profile():
         'profile.html',
         user=current_user,
         email=current_user.email)
+
+
+@main.bp.route('/program-support', methods=['GET', 'POST'])
+@login_required
+def program_support():
+    users = User.query.all()
+
+    return render_template('program_support.html', users=users)

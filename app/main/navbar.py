@@ -41,10 +41,7 @@ class NavBar(object):
             'Scan Results',
             'IAVMs'
         ),
-        'Program Support': (
-            'Users',
-            'Groups'
-        ),
+        'Program Support': (None),
         'Cyber Hunt': (
             {
                 'IOC Tracker': (
