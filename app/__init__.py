@@ -16,8 +16,8 @@ login.login_view = 'auth.index'
 
 def create_app(config_name):
     """
-    Application Factory funtion. Passes a config object and instantiates components
-    needed for application.
+    Application Factory funtion. Passes a config object and instantiates
+    components needed for application.
     """
     app = Flask(__name__)
     app.config.from_object(config[config_name])
