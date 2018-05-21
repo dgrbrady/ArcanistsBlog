@@ -1,15 +1,19 @@
 {% extends "base.html" %}
 
+{% block head %} {{ super() }}
+<link rel="stylesheet" type="text/css" href="../static/css/tickets.css">
+{% endblock %}
+
 {% block page_content %}
 <h1 class="text-center">Open Tickets</h1>
-<ul>
+<div class="container">
     {% for i in open_tickets %}
-        <ul>{{ i.title }}</ul>
-            <li>Creator: {{ i.creator }}</li>
-            <li>Owner: {{ i.owner }}</li>
-            <li>Status: {{ i.status }}</li>
-            <li>Created on: {{ i.date_created }}</li>
-            <li>Ticket content: {{ i.content }}</li>
+        <div class="item item-0 text-center text-bottom">Title: {{ i.title }}</div>
+        <div class="item item-1 text-center">Creator: {{ i.creator }}</div>
+        <div class="item item-2 text-center">Owner: {{ i.owner }}</div>
+        <div class="item item-3 text-center">Status: {{ i.status }}</div>
+        <div class="item item-4 text-center">Created on: {{ i.date_created }}</div>
+        <div class="item item-5">Ticket content: {{ i.content }}</div>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}
