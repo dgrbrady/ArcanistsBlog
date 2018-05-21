@@ -1,6 +1,6 @@
 from flask import render_template, session, redirect, url_for, flash, request
 from flask_login import current_user, login_user, logout_user, login_required
-from app.sql.models import User, BigNumbers
+from app.sql.models import User, BigNumbers, Tickets
 from werkzeug.urls import url_parse
 from app import db, main
 from app.main.forms import LoginForm, ChangeEmailForm
@@ -55,3 +55,10 @@ def program_support():
     users = User.query.all()
 
     return render_template('program_support.html', users=users)
+
+
+@main.bp.route('/tickets', methods=['GET', 'POST'])
+@login_required
+def tickets():
+    open_tickets = Tickets.query.filter_by(status='open').all()
+    return render_template('tickets.html', open_tickets=open_tickets)

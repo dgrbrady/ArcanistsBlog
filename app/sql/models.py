@@ -57,6 +57,19 @@ class BigNumbers(db.Model):
         return self.ticket_leader
 
 
+class Tickets(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    creator = db.Column(db.String(64))
+    owner = db.Column(db.String(64))
+    status = db.Column(db.String(64))
+    date_created = db.Column(db.Integer)
+    title = db.Column(db.String(64))
+    content = db.Column(db.String(128))
+
+    def get_ticket_creator(self, id):
+        return self.creator
+
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))

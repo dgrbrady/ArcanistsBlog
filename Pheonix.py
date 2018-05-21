@@ -1,6 +1,6 @@
 import os
 from app import create_app, db
-from app.sql.models import User, Role, BigNumbers
+from app.sql.models import User, Role, BigNumbers, Tickets
 from flask_migrate import Migrate
 from app.main.navbar import NavBar
 
@@ -11,7 +11,7 @@ migrate = Migrate(app, db)
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db, User=User, Role=Role, BigNumbers=BigNumbers)
+    return dict(db=db, User=User, Role=Role, BigNumbers=BigNumbers, Tickets=Tickets)
 
 
 @app.context_processor

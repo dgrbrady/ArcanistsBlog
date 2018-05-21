@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<h1 class="text-center">Open Tickets</h1>
+<ul>
+    {% for i in open_tickets %}
+        <ul>{{ i.title }}</ul>
+            <li>Creator: {{ i.creator }}</li>
+            <li>Owner: {{ i.owner }}</li>
+            <li>Status: {{ i.status }}</li>
+            <li>Created on: {{ i.date_created }}</li>
+            <li>Ticket content: {{ i.content }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
